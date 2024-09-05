@@ -178,17 +178,17 @@
 	};
 };
 
-&combphy0 {
-	status = "okay";
-};
 
-&combphy1 {
-	status = "okay";
-};
 
-&combphy2 {
-	status = "okay";
-};
+
+
+
+
+
+
+
+
+
 
 &cpu0 {
 	cpu-supply = <&vdd_cpu>;
@@ -198,9 +198,9 @@
 	cpu-supply = <&vdd_cpu>;
 };
 
-&2 {
-	-supply = <&vdd_>;
-};
+
+
+
 
 &3 {
 	cpu-supply = <&vdd_cpu>;
