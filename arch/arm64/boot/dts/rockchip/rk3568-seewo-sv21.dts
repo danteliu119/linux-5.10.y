@@ -525,17 +525,39 @@
 	status = "okay";
 };
 
+&usb2phy0 {
+	status = "okay";
+};
+
+&u2phy0_host {
+	phy-supply = <&vcc5v0_host>;
+	status = "okay";
+};
+
+&u2phy0_otg {
+	vbus-supply = <&vcc5v0_otg>;
+	status = "okay";
+};
+
+&usb2phy1 {
+	status = "okay";
+};
+
+&u2phy1_host {
+	phy-supply = <&vcc5v0_host>;
+	status = "okay";
+};
+
+&u2phy1_otg {
+	phy-supply = <&vcc5v0_host>;
+	status = "okay";
+};
+
 &usb_host0_ehci {
 	status = "okay";
 };
 
 &usb_host0_ohci {
-	status = "okay";
-};
-
-&usb_host0_xhci {
-	extcon = <&usb2phy0>;
-	dr_mode = "host";
 	status = "okay";
 };
 
@@ -547,56 +569,35 @@
 	status = "okay";
 };
 
-&usb_host1_xhci {
-	status = "okay";
-
-	rtl8153: device@2 {
-		compatible = "usbbda,8153";
-		reg = <2>;
-		realtek,led-data = <0x87>;
-	};
-};
-
-&usb2phy0 {
+&usbdrd30 {
 	status = "okay";
 };
 
-&usb2phy0_host {
-	phy-supply = <&vcc5v0_usb_host>;
+&usbdrd_dwc3 {
+	dr_mode = "host";
+	extcon = <&usb2phy0>;
 	status = "okay";
 };
 
-&usb2phy0_otg {
-	phy-supply = <&vcc5v0_usb_otg>;
+&usbhost30 {
 	status = "okay";
 };
 
-&usb2phy1 {
-	status = "okay";
-};
-
-&usb2phy1_host {
-	phy-supply = <&vcc5v0_usb_host>;
-	status = "okay";
-};
-
-&usb2phy1_otg {
-	phy-supply = <&vcc5v0_usb_otg>;
-	status = "okay";
-};
-
-&combphy0 {
-	status = "okay";
-};
-
-&combphy1 {
-	status = "okay";
-};
-
-&combphy2 {
+&usbhost_dwc3 {
 	status = "okay";
 };
 
 &sata2 {
 	status = "okay";
 }
+&combphy0_us {
+	status = "okay";
+};
+
+&combphy1_usq {
+	status = "okay";
+};
+
+&combphy2_psq {
+	status = "okay";
+};
