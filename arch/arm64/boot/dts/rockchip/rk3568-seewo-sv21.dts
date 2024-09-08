@@ -590,14 +590,15 @@
 &sata2 {
 	status = "okay";
 }
-&combphy0_us {
+
+&combphy0 {
 	status = "okay";
 };
 
-&combphy1_usq {
+&combphy1 {
 	status = "okay";
 };
 
-&combphy2_psq {
+&combphy2 {
 	status = "okay";
 };
