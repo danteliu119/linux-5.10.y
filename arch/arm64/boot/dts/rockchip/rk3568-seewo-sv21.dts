@@ -18,18 +18,6 @@
 		mmc0 = &sdhci;
 	};
 
-	fiq_debugger: fiq-debugger {
-		compatible = "rockchip,fiq-debugger";
-		rockchip,serial-id = <2>;
-		rockchip,wake-irq = <0>;
-		rockchip,irq-mode-enable = <1>;
-		rockchip,baudrate = <1500000>;
-		interrupts = <GIC_SPI 252 IRQ_TYPE_LEVEL_LOW>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&uart2m0_xfer>;
-		status = "okay";
-	};
-
 	dc_12v: dc-12v {
 		compatible = "regulator-fixed";
 		regulator-name = "dc_12v";
@@ -95,22 +83,6 @@
 			press-threshold-microvolt = <1750>;
 		};
 	};
-
-	hdmi_sound: hdmi-sound {
-		compatible = "simple-audio-card";
-		simple-audio-card,format = "i2s";
-		simple-audio-card,mclk-fs = <128>;
-		simple-audio-card,name = "rockchip,hdmi";
-		status = "okay";
-
-		simple-audio-card,cpu {
-				sound-dai = <&i2s0_8ch>;
-		};
-
-		simple-audio-card,codec {
-				sound-dai = <&hdmi>;
-		};
-	};
 };
 
 &mdio1 {
@@ -148,12 +120,6 @@
 	status = "okay";
 };
 
-&bus_npu {
-	bus-supply = <&vdd_logic>;
-	pvtm-supply = <&vdd_cpu>;
-	status = "okay";
-};
-
 &cpu0 {
 	cpu-supply = <&vdd_cpu>;
 };
@@ -187,19 +153,6 @@
 };
 
 &display_subsystem {
-	status = "okay";
-};
-
-&hdmi {
-	status = "okay";
-};
-
-&hdmi_in_vp0 {
-	status = "okay";
-};
-
-&route_hdmi {
-	connect = <&vp0_out_hdmi>;
 	status = "okay";
 };
 
@@ -294,21 +247,6 @@
 
 				regulator-state-mem {
 					regulator-on-in-suspend;
-				};
-			};
-
-			vdd_npu: DCDC_REG4 {
-				regulator-always-on;
-				regulator-boot-on;
-				regulator-min-microvolt = <500000>;
-				regulator-max-microvolt = <1350000>;
-				regulator-init-microvolt = <900000>;
-				regulator-ramp-delay = <6001>;
-				regulator-initial-mode = <2>;
-				regulator-name = "vdd_npu";
-
-				regulator-state-mem {
-					regulator-off-in-suspend;
 				};
 			};
 
@@ -555,14 +493,6 @@
 	status = "okay";
 };
 
-&mpp_srv {
-	status = "okay";
-};
-
-&rk_rga {
-	status = "okay";
-};
-
 &rkvdec {
 	status = "okay";
 };
@@ -577,15 +507,6 @@
 };
 
 &rkvenc_mmu {
-	status = "okay";
-};
-
-&rknpu {
-	rknpu-supply = <&vdd_npu>;
-	status = "okay";
-};
-
-&rknpu_mmu {
 	status = "okay";
 };
 
