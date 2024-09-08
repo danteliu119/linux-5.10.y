@@ -589,5 +589,5 @@
 
 &sata2 {
 	status = "okay";
-}
+};
 
