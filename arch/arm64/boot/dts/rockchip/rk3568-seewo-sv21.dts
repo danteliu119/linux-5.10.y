@@ -154,15 +154,15 @@
 	};
 };
 
-&combphy0 {
+&combphy0_us {
 	status = "okay";
 };
 
-&combphy1 {
+&combphy1_usq {
 	status = "okay";
 };
 
-&combphy2 {
+&combphy2_psq {
 	status = "okay";
 };
 
@@ -637,17 +637,39 @@
 	status = "okay";
 };
 
+&usb2phy0 {
+	status = "okay";
+};
+
+&u2phy0_host {
+	phy-supply = <&vcc5v0_host>;
+	status = "okay";
+};
+
+&u2phy0_otg {
+	vbus-supply = <&vcc5v0_otg>;
+	status = "okay";
+};
+
+&usb2phy1 {
+	status = "okay";
+};
+
+&u2phy1_host {
+	phy-supply = <&vcc5v0_host>;
+	status = "okay";
+};
+
+&u2phy1_otg {
+	phy-supply = <&vcc5v0_host>;
+	status = "okay";
+};
+
 &usb_host0_ehci {
 	status = "okay";
 };
 
 &usb_host0_ohci {
-	status = "okay";
-};
-
-&usb_host0_xhci {
-	extcon = <&usb2phy0>;
-	dr_mode = "host";
 	status = "okay";
 };
 
@@ -659,35 +681,20 @@
 	status = "okay";
 };
 
-&usb_host1_xhci {
+&usbdrd30 {
 	status = "okay";
 };
 
-&usb2phy0 {
+&usbdrd_dwc3 {
+	dr_mode = "host";
+	extcon = <&usb2phy0>;
 	status = "okay";
 };
 
-&usb2phy0_host {
-	phy-supply = <&vcc5v0_usb_host>;
+&usbhost30 {
 	status = "okay";
 };
 
-&usb2phy0_otg {
-	vbus-supply = <&vcc5v0_usb_otg>;
+&usbhost_dwc3 {
 	status = "okay";
 };
-
-&usb2phy1 {
-	status = "okay";
-};
-
-&usb2phy1_host {
-	phy-supply = <&vcc5v0_usb_host>;
-	status = "okay";
-};
-
-&usb2phy1_otg {
-	phy-supply = <&vcc5v0_usb_otg>;
-	status = "okay";
-};
-
