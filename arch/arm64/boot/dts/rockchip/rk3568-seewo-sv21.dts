@@ -2,9 +2,9 @@
 
 /dts-v1/;
 #include <dt-bindings/gpio/gpio.h>
-#include <dt-bindings/leds/common.h>
+
 #include <dt-bindings/pinctrl/rockchip.h>
-#include <dt-bindings/display/rockchip_vop.h>
+
 #include "rk3568.dtsi"
 
 / {
@@ -186,9 +186,9 @@
 	assigned-clocks = <&cru SCLK_GMAC0_RX_TX>, <&cru SCLK_GMAC0>;
 	assigned-clock-parents = <&cru SCLK_GMAC0_RGMII_SPEED>;
 	assigned-clock-rates = <0>, <125000000>;
-	clock_in_out = "input";
+	clock_in_out = "output";
 	phy-handle = <&rgmii_phy0>;
-	phy-mode = "rgmii";
+	phy-mode = "rgmii-id";
 	pinctrl-names = "default";
 	pinctrl-0 = <&gmac0_miim
 		     &gmac0_tx_bus2
@@ -220,56 +220,31 @@
 	phy-handle = <&rgmii_phy1>;
 	status = "okay";
 };
+
 &gpu {
 	mali-supply = <&vdd_gpu>;
 	status = "okay";
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 &i2c0 {
 	status = "okay";
 
-		vdd_cpu: syr837@40 {
-		compatible = "silergy,syr827";
-		reg = <0x40>;
-		vin-supply = <&vcc5v0_sys>;
-		regulator-compatible = "fan53555-reg";
-		regulator-name = "vdd_cpu";
-		vsel-gpios = <&gpio0 RK_PA2 GPIO_ACTIVE_HIGH>;
-		regulator-min-microvolt = <712500>;
-		regulator-max-microvolt = <1500000>;
-		regulator-init-microvolt = <900000>;
-		regulator-ramp-delay = <1000>;
+	vdd_cpu: regulator@1c {
+		compatible = "tcs,tcs4525";
+		reg = <0x1c>;
 		fcs,suspend-voltage-selector = <1>;
-		regulator-initial-state = <3>;
+		regulator-name = "vdd_cpu";
 		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <800000>;
+		regulator-max-microvolt = <1150000>;
+		regulator-ramp-delay = <2300>;
+		vin-supply = <&vcc5v0_sys>;
 
 		regulator-state-mem {
 			regulator-off-in-suspend;
 		};
 	};
-
 
 	rk809: pmic@20 {
 		compatible = "rockchip,rk809";
@@ -533,7 +508,7 @@
 &mdio0 {
 	rgmii_phy0: ethernet-phy@0 {
 		compatible = "ethernet-phy-ieee802.3-c22";
-		reg = <0x2>;
+		reg = <0x0>;
 	};
 };
 
@@ -662,6 +637,32 @@
 	status = "okay";
 };
 
+&usb2phy0 {
+	status = "okay";
+};
+
+&u2phy0_host {
+	phy-supply = <&vcc5v0_host>;
+	status = "okay";
+};
+
+&u2phy0_otg {
+	vbus-supply = <&vcc5v0_otg>;
+	status = "okay";
+};
+
+&usb2phy1 {
+	status = "okay";
+};
+
+&u2phy1_host {
+	status = "okay";
+};
+
+&u2phy1_otg {
+	status = "okay";
+};
+
 &usb_host0_ehci {
 	status = "okay";
 };
@@ -678,21 +679,20 @@
 	status = "okay";
 };
 
-&usb2phy0 {
+&usbdrd30 {
 	status = "okay";
 };
 
-&usb2phy1 {
+&usbdrd_dwc3 {
+	dr_mode = "host";
+	extcon = <&usb2phy0>;
 	status = "okay";
 };
 
-&vop {
-	assigned-clocks = <&cru DCLK_VOP0>, <&cru DCLK_VOP1>;
-	assigned-clock-parents = <&pmucru PLL_HPLL>, <&cru PLL_VPLL>;
+&usbhost30 {
 	status = "okay";
 };
 
-&vop_mmu {
+&usbhost_dwc3 {
 	status = "okay";
 };
-
