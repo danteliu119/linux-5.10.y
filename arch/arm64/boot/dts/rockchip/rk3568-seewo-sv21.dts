@@ -642,12 +642,12 @@
 };
 
 &u2phy0_host {
-	phy-supply = <&vcc5v0_host>;
+	phy-supply = <&vcc5v0_usb_host>;
 	status = "okay";
 };
 
 &u2phy0_otg {
-	vbus-supply = <&vcc5v0_otg>;
+	vbus-supply = <&vcc5v0_usb_otg>;
 	status = "okay";
 };
 
