@@ -483,6 +483,48 @@
 	status = "okay";
 };
 
+	usb_host0_xhci: usb@fc000000 {
+		compatible = "rockchip,rk3588-dwc3", "snps,dwc3";
+		reg = <0x0 0xfc000000 0x0 0x400000>;
+		interrupts = <GIC_SPI 220 IRQ_TYPE_LEVEL_HIGH 0>;
+		clocks = <&cru REF_CLK_USB3OTG0>, <&cru SUSPEND_CLK_USB3OTG0>,
+			 <&cru ACLK_USB3OTG0>;
+		clock-names = "ref_clk", "suspend_clk", "bus_clk";
+		dr_mode = "otg";
+		phys = <&u2phy0_otg>, <&usbdp_phy0 PHY_TYPE_USB3>;
+		phy-names = "usb2-phy", "usb3-phy";
+		phy_type = "utmi_wide";
+		power-domains = <&power RK3588_PD_USB>;
+		resets = <&cru SRST_A_USB3OTG0>;
+		snps,dis_enblslpm_quirk;
+		snps,dis-u1-entry-quirk;
+		snps,dis-u2-entry-quirk;
+		snps,dis-u2-freeclk-exists-quirk;
+		snps,dis-del-phy-power-chg-quirk;
+		snps,dis-tx-ipgap-linecheck-quirk;
+		status = "disabled";
+	};
+
+	usb_host1_xhci: usb@fc400000 {
+		compatible = "rockchip,rk3588-dwc3", "snps,dwc3";
+		reg = <0x0 0xfc400000 0x0 0x400000>;
+		interrupts = <GIC_SPI 221 IRQ_TYPE_LEVEL_HIGH 0>;
+		clocks = <&cru REF_CLK_USB3OTG1>, <&cru SUSPEND_CLK_USB3OTG1>,
+			 <&cru ACLK_USB3OTG1>;
+		clock-names = "ref_clk", "suspend_clk", "bus_clk";
+		dr_mode = "otg";
+		phys = <&u2phy1_otg>, <&usbdp_phy1 PHY_TYPE_USB3>;
+		phy-names = "usb2-phy", "usb3-phy";
+		phy_type = "utmi_wide";
+		power-domains = <&power RK3588_PD_USB>;
+		resets = <&cru SRST_A_USB3OTG1>;
+		snps,dis_enblslpm_quirk;
+		snps,dis-u2-freeclk-exists-quirk;
+		snps,dis-del-phy-power-chg-quirk;
+		snps,dis-tx-ipgap-linecheck-quirk;
+		status = "disabled";
+	};
+
 &usb_host0_xhci {
 	extcon = <&usb2phy0>;
 	dr_mode = "host";
@@ -511,12 +553,12 @@
 	status = "okay";
 };
 
-&usb2phy0_host {
+&u2phy0_host {
 	phy-supply = <&vcc5v0_usb_host>;
 	status = "okay";
 };
 
-&usb2phy0_otg {
+&u2phy0_otg  {
 	phy-supply = <&vcc5v0_usb_otg>;
 	status = "okay";
 };
@@ -525,25 +567,25 @@
 	status = "okay";
 };
 
-&usb2phy1_host {
+&u2phy1_host {
 	phy-supply = <&vcc5v0_usb_host>;
 	status = "okay";
 };
 
-&usb2phy1_otg {
+&u2phy1_otg {
 	phy-supply = <&vcc5v0_usb_otg>;
 	status = "okay";
 };
 
-&combphy0 {
+&combphy0_us {
 	status = "okay";
 };
 
-&combphy1 {
+&combphy1_usq {
 	status = "okay";
 };
 
-&combphy2 {
+&combphy2_psq {
 	status = "okay";
 };
 
