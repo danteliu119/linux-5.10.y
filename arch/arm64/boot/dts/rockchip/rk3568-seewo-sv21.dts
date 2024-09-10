@@ -14,6 +14,12 @@
 	model = "seewo sv21-rk3568";
 	compatible = "seewo,sv21-rk3568", "rockchip,rk3568";
 
+ 	rtl8153: device@2 {
+ 		compatible = "usbbda,8153";
+ 		reg = <2>;
+		realtek,led-data = <0x87>;
+ 	};
+
 	aliases {
 		ethernet0 = &gmac1;
 		ethernet1 = &rtl8153;
@@ -344,6 +350,18 @@
 				regulator-state-mem {
 					regulator-off-in-suspend;
 				};
+			};
+
+ 			vcc_rtl8153: vcc-rtl8153-regulator {
+ 				compatible = "regulator-fixed";
+ 				gpio = <&gpio2 RK_PC6 GPIO_ACTIVE_HIGH>;
+ 				pinctrl-names = "default";
+ 				pinctrl-0 = <&rtl8153_en_drv>;
+ 				regulator-always-on;
+ 				regulator-name = "vcc_rtl8153";
+ 				regulator-min-microvolt = <5000000>;
+ 				regulator-max-microvolt = <5000000>;
+ 				enable-active-high;
 			};
 
 			codec {
